@@ -1,4 +1,4 @@
-package com.manmanbuy.mother;
+package com.maochunjie.mother;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

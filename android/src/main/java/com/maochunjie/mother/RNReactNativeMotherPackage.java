@@ -1,5 +1,5 @@
 
-package com.manmanbuy.mother;
+package com.maochunjie.mother;
 
 import java.util.Arrays;
 import java.util.Collections;
