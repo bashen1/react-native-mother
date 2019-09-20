@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <UserNotifications/UserNotifications.h>
 
 @interface UZAppDelegate : UIResponder
-<UIApplicationDelegate>
+<UIApplicationDelegate, UNUserNotificationCenterDelegate>
 
 + (instancetype)appDelegate;
 
@@ -26,6 +27,15 @@
  @return 模块配置信息
  */
 - (NSDictionary *)getFeatureByName:(NSString *)name;
+
+/**
+ 从主widget的加密的key.xml文件中获取解密后的数据
+ 
+ @param key 加密字段
+ 
+ @return 解密后的数据，如果获取失败则返回nil
+ */
+- (NSString *)securityValueForKey:(NSString *)key;
 
 //实现UIApplicationDelegate方法来接收应用消息，例如推送
 - (void)addAppHandle:(id <UIApplicationDelegate>)handle;
