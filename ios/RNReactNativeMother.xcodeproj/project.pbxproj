@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		89256DD12213987F00529D68 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89256DD02213987F00529D68 /* AdSupport.framework */; };
+		892A69DF2338702C0069F731 /* libUZEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 892A69DB2338702B0069F731 /* libUZEngine.a */; };
 		896572EA21E31F9400CD45FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896572E921E31F9400CD45FF /* UIKit.framework */; };
 		896572EC21E31FA000CD45FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896572EB21E31FA000CD45FF /* Foundation.framework */; };
-		89FB5E662268D2CF00BAAEEB /* libUZEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FB5E622268D2CF00BAAEEB /* libUZEngine.a */; };
 		89FB5E682268D2ED00BAAEEB /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FB5E672268D2ED00BAAEEB /* libicucore.tbd */; };
 		B3E7B58A1CC2AC0600A0062D /* RNReactNativeMother.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNReactNativeMother.m */; };
 /* End PBXBuildFile section */
@@ -30,15 +30,15 @@
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNReactNativeMother.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNReactNativeMother.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		89256DD02213987F00529D68 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		892A69D82338702B0069F731 /* UIViewControllerExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewControllerExtension.h; sourceTree = "<group>"; };
+		892A69D92338702B0069F731 /* UZModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZModule.h; sourceTree = "<group>"; };
+		892A69DA2338702B0069F731 /* UZURLTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZURLTask.h; sourceTree = "<group>"; };
+		892A69DB2338702B0069F731 /* libUZEngine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUZEngine.a; sourceTree = "<group>"; };
+		892A69DC2338702B0069F731 /* UZAppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZAppUtils.h; sourceTree = "<group>"; };
+		892A69DD2338702B0069F731 /* NSDictionaryUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionaryUtils.h; sourceTree = "<group>"; };
+		892A69DE2338702B0069F731 /* UZAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZAppDelegate.h; sourceTree = "<group>"; };
 		896572E921E31F9400CD45FF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		896572EB21E31FA000CD45FF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		89FB5E5F2268D2CF00BAAEEB /* UIViewControllerExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewControllerExtension.h; sourceTree = "<group>"; };
-		89FB5E602268D2CF00BAAEEB /* UZURLTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZURLTask.h; sourceTree = "<group>"; };
-		89FB5E612268D2CF00BAAEEB /* UZModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZModule.h; sourceTree = "<group>"; };
-		89FB5E622268D2CF00BAAEEB /* libUZEngine.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUZEngine.a; sourceTree = "<group>"; };
-		89FB5E632268D2CF00BAAEEB /* UZAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZAppDelegate.h; sourceTree = "<group>"; };
-		89FB5E642268D2CF00BAAEEB /* UZAppUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UZAppUtils.h; sourceTree = "<group>"; };
-		89FB5E652268D2CF00BAAEEB /* NSDictionaryUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionaryUtils.h; sourceTree = "<group>"; };
 		89FB5E672268D2ED00BAAEEB /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		B3E7B5881CC2AC0600A0062D /* RNReactNativeMother.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNReactNativeMother.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNReactNativeMother.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNReactNativeMother.m; sourceTree = "<group>"; };
@@ -50,9 +50,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				89FB5E682268D2ED00BAAEEB /* libicucore.tbd in Frameworks */,
-				89FB5E662268D2CF00BAAEEB /* libUZEngine.a in Frameworks */,
 				89256DD12213987F00529D68 /* AdSupport.framework in Frameworks */,
 				896572EC21E31FA000CD45FF /* Foundation.framework in Frameworks */,
+				892A69DF2338702C0069F731 /* libUZEngine.a in Frameworks */,
 				896572EA21E31F9400CD45FF /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,7 +71,13 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				89FB5E5E2268D2CF00BAAEEB /* UZEngine */,
+				892A69DB2338702B0069F731 /* libUZEngine.a */,
+				892A69DD2338702B0069F731 /* NSDictionaryUtils.h */,
+				892A69D82338702B0069F731 /* UIViewControllerExtension.h */,
+				892A69DE2338702B0069F731 /* UZAppDelegate.h */,
+				892A69DC2338702B0069F731 /* UZAppUtils.h */,
+				892A69D92338702B0069F731 /* UZModule.h */,
+				892A69DA2338702B0069F731 /* UZURLTask.h */,
 				B3E7B5881CC2AC0600A0062D /* RNReactNativeMother.h */,
 				B3E7B5891CC2AC0600A0062D /* RNReactNativeMother.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
@@ -88,20 +94,6 @@
 				896572E921E31F9400CD45FF /* UIKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		89FB5E5E2268D2CF00BAAEEB /* UZEngine */ = {
-			isa = PBXGroup;
-			children = (
-				89FB5E5F2268D2CF00BAAEEB /* UIViewControllerExtension.h */,
-				89FB5E602268D2CF00BAAEEB /* UZURLTask.h */,
-				89FB5E612268D2CF00BAAEEB /* UZModule.h */,
-				89FB5E622268D2CF00BAAEEB /* libUZEngine.a */,
-				89FB5E632268D2CF00BAAEEB /* UZAppDelegate.h */,
-				89FB5E642268D2CF00BAAEEB /* UZAppUtils.h */,
-				89FB5E652268D2CF00BAAEEB /* NSDictionaryUtils.h */,
-			);
-			path = UZEngine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +253,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/UZEngine",
+					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = RNReactNativeMother;
@@ -280,6 +273,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/UZEngine",
+					"$(PROJECT_DIR)",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = RNReactNativeMother;
