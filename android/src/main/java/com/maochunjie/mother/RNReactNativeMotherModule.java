@@ -78,8 +78,10 @@ public class RNReactNativeMotherModule extends ReactContextBaseJavaModule {
         }
         try {
             Intent showDetial = new Intent("android.intent.action.VIEW", Uri.parse("market://details?id=" + pkg));
+            showDetial.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             this.reactContext.startActivity(showDetial);
         } catch (Exception paramUZModuleContext) {
+            Log.e("react-native-mother",paramUZModuleContext.getMessage());
         }
     }
 
