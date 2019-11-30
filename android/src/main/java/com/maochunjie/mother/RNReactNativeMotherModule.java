@@ -26,6 +26,8 @@ import android.content.pm.PackageInfo;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
+import java.io.File;
+
 import static android.content.Context.TELEPHONY_SERVICE;
 
 public class RNReactNativeMotherModule extends ReactContextBaseJavaModule {
@@ -48,6 +50,36 @@ public class RNReactNativeMotherModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public String getName() {
         return "RNReactNativeMother";
+    }
+
+    @ReactMethod
+    public void deleteContainerFile(ReadableMap data) {
+        String path = data.getString("path");
+        if (path != null) {
+            DeleteFile(new File("data/data/" + reactContext.getPackageName() + path));
+        }
+    }
+
+    private void DeleteFile(File file) {
+        if (file.exists() == false) {
+            return;
+        } else {
+            if (file.isFile()) {
+                file.delete();
+                return;
+            }
+            if (file.isDirectory()) {
+                File[] childFile = file.listFiles();
+                if (childFile == null || childFile.length == 0) {
+                    file.delete();
+                    return;
+                }
+                for (File f : childFile) {
+                    DeleteFile(f);
+                }
+                file.delete();
+            }
+        }
     }
 
     @ReactMethod

@@ -74,3 +74,7 @@ export async function getMetaDataIntFromAppication(params) {
 export async function getMetaDataBooleanFromAppication(params) {
     return await RNReactNativeMother.getMetaDataBooleanFromAppication(params)
 }
+
+export async function deleteContainerFile(params) {
+    return await RNReactNativeMother.deleteContainerFile(params)
+}
