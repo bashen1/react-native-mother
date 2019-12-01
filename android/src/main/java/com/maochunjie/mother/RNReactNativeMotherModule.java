@@ -56,7 +56,7 @@ public class RNReactNativeMotherModule extends ReactContextBaseJavaModule {
     public void deleteContainerFile(ReadableMap data) {
         String path = data.getString("path");
         if (path != null) {
-            DeleteFile(new File("data/data/" + reactContext.getPackageName() + path));
+            DeleteFile(new File(reactContext.getFilesDir().getParent() + path));
         }
     }
 

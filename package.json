@@ -1,7 +1,7 @@
 
 {
   "name": "react-native-mother",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "react-native library for others",
   "main": "index.js",
   "scripts": {
