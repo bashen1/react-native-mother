@@ -16,10 +16,11 @@ Pod::Spec.new do |s|
   s.resources     = ['*.bundle', '*.strings']
   s.requires_arc  = true
 
-  s.vendored_libraries = "ios/libUZEngine.a"
+  s.vendored_libraries = "ios/libAPICloud.a"
   s.frameworks = "AdSupport", "Foundation", "UIKit"
   s.libraries = "icucore"
 
   s.dependency "React"
+  s.dependency 'SSZipArchive', '~> 2.1'
 
 end
