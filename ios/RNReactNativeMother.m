@@ -1,3 +1,4 @@
+#import <UserNotifications/UserNotifications.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <StoreKit/StoreKit.h>
@@ -33,27 +34,31 @@ RCT_EXPORT_MODULE()
 }
 
 + (void)isPush: (RCTPromiseResolveBlock)resolve {
-    if ([[UIDevice currentDevice].systemVersion floatValue]>=8.0f) {
-        UIUserNotificationSettings *setting = [[UIApplication sharedApplication] currentUserNotificationSettings];
-        if (UIUserNotificationTypeNone == setting.types) {
-            //NSLog(@"推送关闭");
-            NSDictionary *ret = @{@"code":@"0",@"msg":@"推送关闭"};
-            resolve(ret);
-        }else{
-            NSDictionary *ret = @{@"code":@"1",@"msg":@"推送打开"};
-            resolve(ret);
-        }
-    }else{
-        UIRemoteNotificationType type = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-        if(UIRemoteNotificationTypeNone == type){
-            //NSLog(@"推送关闭");
-            NSDictionary *ret = @{@"code":@"0",@"msg":@"推送关闭"};
-            resolve(ret);
-        }else{
-            //NSLog(@"推送打开");
-            NSDictionary *ret = @{@"code":@"1",@"msg":@"推送打开"};
-            resolve(ret);
-        }
+    if (@available(iOS 10.0, *)) {
+        [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                BOOL isAllow = (settings.authorizationStatus == UNAuthorizationStatusAuthorized);
+                if (isAllow) {
+                    NSDictionary *ret = @{@"code":@"1",@"msg":@"推送打开"};
+                    resolve(ret);
+                } else {
+                    NSDictionary *ret = @{@"code":@"0",@"msg":@"推送关闭"};
+                    resolve(ret);
+                }
+            });
+        }];
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIUserNotificationSettings *settings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+            BOOL isAllow = (settings.types != UIUserNotificationTypeNone);
+            if (isAllow) {
+                NSDictionary *ret = @{@"code":@"1",@"msg":@"推送打开"};
+                resolve(ret);
+            } else {
+                NSDictionary *ret = @{@"code":@"0",@"msg":@"推送关闭"};
+                resolve(ret);
+            }
+        });
     }
 }
 
