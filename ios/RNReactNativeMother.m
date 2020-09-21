@@ -143,6 +143,31 @@ RCT_EXPORT_METHOD(iosShowComment:(NSDictionary *)param){
 RCT_EXPORT_METHOD(iosShowDetail:(NSDictionary *)param){
     [RNReactNativeMother iosShowDetail: param];
 }
+
+/**
+ * 是否拦截iOS中的剪切板
+ * 如果在iOS14以上，则返回剪切板中是否有链接
+ * 如果在iOS14以下，则一律返回有链接
+ */
+RCT_EXPORT_METHOD(iosHandleClipboardHasUrl:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject){
+    if (@available(iOS 14.0, *)) {
+        NSSet *patterns = [[NSSet alloc] initWithObjects:UIPasteboardDetectionPatternProbableWebURL, nil];
+        [[UIPasteboard generalPasteboard] detectPatternsForPatterns:patterns completionHandler:^(NSSet<UIPasteboardDetectionPattern> * _Nullable result, NSError * _Nullable error) {
+            if (result && result.count) {
+                // 当前剪切板中存在 URL
+                NSDictionary *ret = @{@"code": @1};
+                resolve(ret);
+            } else {
+                NSDictionary *ret = @{@"code": @0};
+                resolve(ret);
+            }
+        }];
+    } else {
+        // Fallback on earlier versions
+        NSDictionary *ret = @{@"code": @1};
+        resolve(ret);
+    }
+}
 ///////
 
 @end
