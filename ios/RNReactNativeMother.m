@@ -5,6 +5,7 @@
 #import "RNReactNativeMother.h"
 #import <React/RCTLog.h>
 #import <AdSupport/AdSupport.h>
+@import AppTrackingTransparency;
 #import "UZAppUtils.h"
 
 @implementation RNReactNativeMother
@@ -63,8 +64,27 @@ RCT_EXPORT_MODULE()
 }
 
 + (void)getIDFA: (RCTPromiseResolveBlock)resolve {
-    NSString* idfaStr = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-    resolve(idfaStr);
+    if (@available(iOS 14, *)) {
+        // iOS14及以上版本需要先请求权限
+        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+            // 获取到权限后，依然使用老方法获取idfa
+            if (status == ATTrackingManagerAuthorizationStatusAuthorized) {
+                NSString *idfa = [[ASIdentifierManager sharedManager].advertisingIdentifier UUIDString];
+                resolve(idfa);
+            } else {
+                resolve(@"");
+            }
+        }];
+    } else {
+        // iOS14以下版本依然使用老方法
+        // 判断在设置-隐私里用户是否打开了广告跟踪
+        if ([[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]) {
+            NSString *idfa = [[ASIdentifierManager sharedManager].advertisingIdentifier UUIDString];
+            resolve(idfa);
+        } else {
+            resolve(@"");
+        }
+    }
 }
 
 + (void)getUUID: (RCTPromiseResolveBlock)resolve {
