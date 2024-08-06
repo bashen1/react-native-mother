@@ -19,10 +19,6 @@ export async function getIDFA() {
     return await RNReactNativeMother.getIDFA();
 }
 
-export async function getUUID() {
-    return await RNReactNativeMother.getUUID();
-}
-
 export function showOtherIOS(params) {
     RNReactNativeMother.showOtherIOS(params);
 }

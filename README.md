@@ -28,4 +28,3 @@ import * as mOther from 'react-native-mother';
 
 // TODO: What to do with the module?
 ```
-  

@@ -16,7 +16,6 @@ Pod::Spec.new do |s|
   s.resources     = ['*.bundle', '*.strings']
   s.requires_arc  = true
 
-  s.vendored_libraries = "ios/libAPICloud.a"
   s.frameworks = "AdSupport", "Foundation", "UIKit"
   s.libraries = "icucore"
 

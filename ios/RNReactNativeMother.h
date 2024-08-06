@@ -7,9 +7,8 @@
 
 @interface RNReactNativeMother : NSObject <RCTBridgeModule>
 + (void)showSet;
-- (void)showOtherIOS: (NSDictionary *)param;
+- (void)showOtherIOS:(NSDictionary *)param;
 + (void)iosShowStar;
-- (void)iosShowComment: (NSDictionary *)param;
-- (void)iosShowDetail: (NSDictionary *)param;
+- (void)iosShowComment:(NSDictionary *)param;
+- (void)iosShowDetail:(NSDictionary *)param;
 @end
-  
