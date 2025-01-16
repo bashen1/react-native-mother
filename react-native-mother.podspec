@@ -20,6 +20,5 @@ Pod::Spec.new do |s|
   s.libraries = "icucore"
 
   s.dependency "React"
-  s.dependency 'SSZipArchive', '~> 2.1'
 
 end
