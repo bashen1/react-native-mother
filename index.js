@@ -43,18 +43,6 @@ export function showOtherAndroid(params) {
     RNReactNativeMother.showOtherAndroid(params);
 }
 
-export async function getStatusBarHeight() {
-    return await RNReactNativeMother.getStatusBarHeight();
-}
-
-export async function getPermission(params) {
-    return await RNReactNativeMother.getPermission(params);
-}
-
-export async function getPhoneInfo() {
-    return await RNReactNativeMother.getPhoneInfo();
-}
-
 export async function getMetaDataFromActivity(params) {
     return await RNReactNativeMother.getMetaDataFromActivity(params);
 }

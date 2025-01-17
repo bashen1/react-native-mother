@@ -1,8 +1,5 @@
-
 package com.maochunjie.mother;
 
-import android.Manifest;
-import androidx.core.app.ActivityCompat;
 import android.util.Log;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -21,26 +18,12 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.provider.Settings;
-import android.telephony.TelephonyManager;
 
 import java.io.File;
-
-import static android.content.Context.TELEPHONY_SERVICE;
 
 public class RNReactNativeMotherModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
-    private String deviceId = "";
-    private String subscriberId = "";
-    private String line1Number = "";
-    private String simSerialNumber = "";
-    private String simOperatorName = "";
-    private String networkOperatorName = "";
-    private int REQUEST_PHONE_STATE = 101;
-    private Promise commonPromise = null;
 
     public RNReactNativeMotherModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -157,71 +140,6 @@ public class RNReactNativeMotherModule extends ReactContextBaseJavaModule {
         }
     }
 
-    @ReactMethod //获取状态栏内高度
-    public void getStatusBarHeight(Promise p) {
-        int statusHeight = 0;
-        int resourceId = this.reactContext.getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            statusHeight = this.reactContext.getResources().getDimensionPixelSize(resourceId);
-        }
-        WritableMap map = Arguments.createMap();
-        map.putDouble("statusHeight", px2dp(this.reactContext, statusHeight));
-        //callback.invoke(null, map);
-        p.resolve(map);
-    }
-
-    @ReactMethod //获取手机信息
-    public void getPhoneInfo(Promise p) {
-        this.commonPromise = p;
-        if (ActivityCompat.checkSelfPermission(this.reactContext, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            //toast("需要动态获取权限");
-            ActivityCompat.requestPermissions(this.reactContext.getCurrentActivity(), new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_PHONE_STATE);
-        } else {
-            //toast("不需要动态获取权限");
-            TelephonyManager telephonyManager = (TelephonyManager) this.reactContext.getSystemService(TELEPHONY_SERVICE);
-            this.deviceId = telephonyManager.getDeviceId();
-            this.subscriberId = telephonyManager.getSubscriberId();
-            this.line1Number = telephonyManager.getLine1Number();
-            this.simSerialNumber = telephonyManager.getSimSerialNumber();
-            this.simOperatorName = telephonyManager.getSimOperatorName();
-            this.networkOperatorName = telephonyManager.getNetworkOperatorName();
-        }
-        dealPhoneInfo(this.commonPromise);
-    }
-
-    @ReactMethod //获取权限信息
-    public void getPermission(ReadableMap data, Promise p) {
-        String permission = "";
-        if (data.getString("permission") != null) {
-            permission = data.getString("permission");
-        }
-        boolean isOpen = false;
-        switch (permission) {
-            case "READ_PHONE_STATE":
-                isOpen = ActivityCompat.checkSelfPermission(this.reactContext, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED;
-                break;
-            case "READ_EXTERNAL_STORAGE":
-                isOpen = ActivityCompat.checkSelfPermission(this.reactContext, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-                break;
-            case "WRITE_EXTERNAL_STORAGE":
-                isOpen = ActivityCompat.checkSelfPermission(this.reactContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-                break;
-            case "CAMERA":
-                isOpen = ActivityCompat.checkSelfPermission(this.reactContext, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
-                break;
-            case "CALL_PHONE":
-                isOpen = ActivityCompat.checkSelfPermission(this.reactContext, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED;
-                break;
-            case "LOCATION_HARDWARE":
-                isOpen = ActivityCompat.checkSelfPermission(this.reactContext, Manifest.permission.LOCATION_HARDWARE) == PackageManager.PERMISSION_GRANTED;
-                break;
-            default:
-                isOpen = false;
-                break;
-        }
-        p.resolve(isOpen);
-    }
-
     @ReactMethod // 获取activity标签中meta-data的string类型参数值
     public void getMetaDataFromActivity(ReadableMap data, Promise p) {
         String key = "";
@@ -309,67 +227,5 @@ public class RNReactNativeMotherModule extends ReactContextBaseJavaModule {
             e.printStackTrace();
         }
         p.resolve(val);
-    }
-
-    private static float px2dp(Context paramContext, float paramFloat) {
-        return paramFloat
-                / paramContext.getResources().getDisplayMetrics().density;
-    }
-
-    private void dealPhoneInfo(Promise p) {
-        String strModel = Build.MODEL;
-        String strBrand = Build.BRAND;
-        String strManufacturer = Build.MANUFACTURER;
-        long nowTime = Build.TIME;
-        String androidId = Settings.Secure.getString(this.reactContext.getContentResolver(), "android_id");
-
-        String appName = "";
-        String versionName = "";
-        int versionCode = 0;
-        String packageName = "";
-
-        PackageManager packageManager = this.reactContext.getPackageManager();
-        PackageInfo packageInfo;
-        try {
-            packageInfo = packageManager.getPackageInfo(
-                    this.reactContext.getPackageName(), 0);
-            int labelRes = packageInfo.applicationInfo.labelRes;
-            appName = this.reactContext.getResources().getString(labelRes);
-            versionName = packageInfo.versionName;
-            versionCode = packageInfo.versionCode;
-            packageName = packageInfo.packageName;
-        } catch (NameNotFoundException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-
-        WritableMap map = Arguments.createMap();
-
-        map.putString("phoneNumer", this.line1Number);
-        map.putDouble("time", nowTime);
-        map.putString("model", strModel);
-        map.putString("networkOperatorName", this.networkOperatorName);
-        map.putString("simSerialNumber", this.simSerialNumber);
-        map.putString("manufacturer", strManufacturer);
-        map.putString("imei", this.deviceId);
-        map.putString("brand", strBrand);
-        map.putString("simOperatorName", this.simOperatorName);
-        map.putString("imsi", this.subscriberId);
-        map.putString("androidId", androidId);
-        map.putString("appName", appName);
-        map.putDouble("versionCode", versionCode);
-        map.putString("versionName", versionName);
-        map.putString("packageName", packageName);
-        p.resolve(map);
-        //commonPromise = null;
-    }
-
-    //目前还没有回调这个
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == REQUEST_PHONE_STATE && grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            dealPhoneInfo(this.commonPromise);
-        } else {
-            this.commonPromise.resolve(false);
-        }
     }
 }
