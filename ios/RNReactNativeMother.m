@@ -171,7 +171,14 @@ RCT_EXPORT_METHOD(iosShowDetail:(NSDictionary *)param) {
  */
 RCT_EXPORT_METHOD(iosHandleClipboardHasUrl:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     if (@available(iOS 14.0, *)) {
-        NSSet *patterns = [[NSSet alloc] initWithObjects:UIPasteboardDetectionPatternProbableWebURL, nil];
+        NSMutableSet *patternsSet = [[NSMutableSet alloc] initWithObjects:UIPasteboardDetectionPatternProbableWebURL, nil];
+
+        if (@available(iOS 15.0, *)) {
+            [patternsSet addObject:UIPasteboardDetectionPatternLink];
+        }
+
+        NSSet *patterns = [NSSet setWithSet:patternsSet];
+
         [[UIPasteboard generalPasteboard] detectPatternsForPatterns:patterns
                                                   completionHandler:^(NSSet<UIPasteboardDetectionPattern> *_Nullable result, NSError *_Nullable error) {
             if (result && result.count) {
