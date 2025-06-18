@@ -22,8 +22,9 @@ RCT_EXPORT_MODULE()
     NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
 
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
-        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-        [[UIApplication sharedApplication] openURL:url];
+        [[UIApplication sharedApplication] openURL:url
+                                           options:@{}
+                                 completionHandler:nil];
     }
 }
 
@@ -34,7 +35,9 @@ RCT_EXPORT_MODULE()
         url = (NSString *)param[@"url"];
     }
 
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]
+                                       options:@{}
+                             completionHandler:nil];
 }
 
 + (void)isPush:(RCTPromiseResolveBlock)resolve {
@@ -108,7 +111,9 @@ RCT_EXPORT_MODULE()
     }
 
     NSString *str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@?action=write-review", appID];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]
+                                       options:@{}
+                             completionHandler:nil];
 }
 
 + (void)iosShowDetail:(NSDictionary *)param {
@@ -119,12 +124,11 @@ RCT_EXPORT_MODULE()
     }
 
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://itunes.apple.com/cn/app/id%@?mt=8", appID]];
-    [[UIApplication sharedApplication] openURL:url];
+    [[UIApplication sharedApplication] openURL:url
+                                       options:@{}
+                             completionHandler:nil];
 }
 
-//////
-
-///////
 RCT_EXPORT_METHOD(test) {
     NSLog(@"11111");
 }
@@ -198,6 +202,5 @@ RCT_EXPORT_METHOD(iosHandleClipboardHasUrl:(RCTPromiseResolveBlock)resolve rejec
         resolve(ret);
     }
 }
-///////
 
 @end
