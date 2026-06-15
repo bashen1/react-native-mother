@@ -30,7 +30,7 @@ public class RNReactNativeMotherModule extends ReactContextBaseJavaModule {
         this.reactContext = reactContext;
     }
 
-    @ReactMethod
+    @Override
     public String getName() {
         return "RNReactNativeMother";
     }
